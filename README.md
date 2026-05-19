@@ -1,6 +1,6 @@
 # Better Auth Devtools
 
-A floating devtools panel for [Better Auth](https://better-auth.com). Inspect sessions, browse users, sign in as anyone, and manage preconfigured login links — all from a self-hosted UI.
+A floating devtools panel for [Better Auth](https://better-auth.com). Inspect sessions, browse users, sign in as anyone, and manage preconfigured login links.
 
 ## Status
 
