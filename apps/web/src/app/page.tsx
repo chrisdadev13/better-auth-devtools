@@ -1,10 +1,77 @@
 import { auth } from "@better-auth-devtools/auth";
 import { headers } from "next/headers";
 
-export default async function Home() {
+import { CodeTabs } from "./code-tabs";
+
+const PLUGIN_CODE = `import { betterAuthDevtools } from "@better-auth-devtools/devtools";
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
+import { db } from "./db";
+
+const auth = betterAuth({
+  database: drizzleAdapter(db, { provider: "pg" }),
+  plugins: [
+    betterAuthDevtools({
+      enabled: true,
+      loginLinks: [
+        { key: "admin", label: "Admin", email: "admin@example.com" },
+      ],
+    }),
+    nextCookies(),
+  ],
+});`;
+
+const PROVIDER_CODE = `"use client";
+
+import { BetterAuthDevtools } from "@better-auth-devtools/devtools";
+import { authClient } from "./lib/auth-client";
+
+export default function Providers({ children }) {
+  return (
+    <>
+      {children}
+      <BetterAuthDevtools auth={authClient} />
+    </>
+  );
+}`;
+
+const CLIENT_CODE = `import { createAuthClient } from "better-auth/client";
+
+export const authClient = createAuthClient({
+  baseURL: process.env.NEXT_PUBLIC_APP_URL,
+});`;
+
+const TABS = [
+	{
+		id: "server",
+		label: "Server",
+		code: PLUGIN_CODE,
+		lang: "typescript" as const,
+	},
+	{
+		id: "client",
+		label: "Client",
+		code: CLIENT_CODE,
+		lang: "typescript" as const,
+	},
+	{
+		id: "providers",
+		label: "Providers",
+		code: PROVIDER_CODE,
+		lang: "tsx" as const,
+	},
+];
+
+export default async function Home({
+	searchParams,
+}: {
+	searchParams: Promise<{ tab?: string }>;
+}) {
 	const session = await auth.api.getSession({
 		headers: await headers(),
 	});
+	const { tab: activeTab } = await searchParams;
 
 	const primaryHref = session?.user ? "/dashboard" : "/auth";
 	const primaryLabel = session?.user ? "Dashboard" : "Login";
@@ -25,7 +92,7 @@ export default async function Home() {
 						</a>
 					</div>
 					<a
-						href="https://github.com/better-auth/better-auth"
+						href="https://github.com/chrisdadev13/better-auth-devtools"
 						className="rounded-full border border-black/8 px-3 py-1.5 font-medium text-xs text-zinc-700 transition-colors hover:bg-black/4 dark:border-white/[.145] dark:text-zinc-300 dark:hover:bg-white/10"
 						target="_blank"
 						rel="noopener noreferrer"
@@ -66,7 +133,7 @@ export default async function Home() {
 							.
 						</p>
 					</div>
-					<div className=" flex flex-col gap-3 font-medium text-sm sm:flex-row">
+					<div className="flex flex-col gap-3 font-medium text-sm sm:flex-row">
 						<a
 							className="flex h-10 w-full items-center justify-center gap-2 rounded-full bg-foreground px-4 text-background transition-colors hover:bg-[#383838] sm:w-36 dark:hover:bg-[#ccc]"
 							href={primaryHref}
@@ -75,13 +142,20 @@ export default async function Home() {
 						</a>
 						<a
 							className="flex h-10 w-full items-center justify-center rounded-full border border-black/8 px-4 text-zinc-700 transition-colors hover:bg-black/4 sm:w-36 dark:border-white/[.145] dark:text-zinc-300 dark:hover:bg-white/10"
-							href="https://github.com/better-auth/better-auth"
+							href="https://github.com/chrisdadev13/better-auth-devtools"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							GitHub Repo
 						</a>
 					</div>
+				</section>
+
+				<section className="mt-16 space-y-4">
+					<h2 className="font-semibold text-black text-lg dark:text-zinc-50">
+						Integration
+					</h2>
+					<CodeTabs tabs={TABS} activeTab={activeTab} />
 				</section>
 			</main>
 		</div>

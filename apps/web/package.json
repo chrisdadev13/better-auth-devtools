@@ -12,6 +12,8 @@
 		"@better-auth-devtools/devtools": "workspace:*",
 		"@better-auth-devtools/env": "workspace:*",
 		"@better-auth-devtools/ui": "workspace:*",
+		"@shikijs/langs": "^4.1.0",
+		"@shikijs/themes": "^4.1.0",
 		"@tanstack/react-form": "^1.28.0",
 		"babel-plugin-react-compiler": "^1.0.0",
 		"better-auth": "catalog:",
@@ -21,6 +23,7 @@
 		"next-themes": "catalog:",
 		"react": "catalog:",
 		"react-dom": "catalog:",
+		"shiki": "^4.1.0",
 		"sonner": "catalog:",
 		"zod": "catalog:"
 	},
