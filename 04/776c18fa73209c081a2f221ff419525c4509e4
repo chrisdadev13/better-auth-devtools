@@ -1,0 +1,19 @@
+turbo.json
+  s_e5e0df9e2285a8::t_9fa1d8ae885b71 8-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "04776c18fa73209c081a2f221ff419525c4509e4",
+  "prompts": {},
+  "sessions": {
+    "s_e5e0df9e2285a8": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1be756b64ffex0Hvfm3u3yIxej",
+        "model": "MiniMaxAI/MiniMax-M2.7"
+      },
+      "human_author": "Chris <92900301+chrisdadev13@users.noreply.github.com>"
+    }
+  }
+}
