@@ -23,6 +23,7 @@ export function createAuth() {
 		baseURL: env.BETTER_AUTH_URL,
 		plugins: [
 			betterAuthDevtools({
+				enabled: true,
 				loginLinks: [
 					{
 						key: "admin",
