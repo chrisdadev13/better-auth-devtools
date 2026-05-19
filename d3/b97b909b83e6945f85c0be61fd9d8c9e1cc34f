@@ -1,0 +1,19 @@
+packages/auth/src/index.ts
+  s_f374c5596b2622::t_685c7fc701a158 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.9",
+  "base_commit_sha": "d3b97b909b83e6945f85c0be61fd9d8c9e1cc34f",
+  "prompts": {},
+  "sessions": {
+    "s_f374c5596b2622": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1be66f821ffeUqUQMEFEhisdbS",
+        "model": "MiniMaxAI/MiniMax-M2.7"
+      },
+      "human_author": "Chris <92900301+chrisdadev13@users.noreply.github.com>"
+    }
+  }
+}
